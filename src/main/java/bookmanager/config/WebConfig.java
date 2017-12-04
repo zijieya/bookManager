@@ -26,6 +26,16 @@ public class WebConfig  extends WebMvcConfigurerAdapter{
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
+    //配置user目录下的视图解析器
+   /* @Bean
+    public ViewResolver ViewResolver(){
+        InternalResourceViewResolver resolver=new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/view/user");
+        resolver.setSuffix(".jsp");
+        resolver.setExposeContextBeansAsAttributes(true);
+        return resolver;
+    }*/
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("WEB-INF/css/").setCachePeriod(31556926);
@@ -33,8 +43,6 @@ public class WebConfig  extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/js/**").addResourceLocations("WEB-INF/js/").setCachePeriod(31556926);
         registry.addResourceHandler("/fonts/**").addResourceLocations("WEB-INF/fonts/").setCachePeriod(31556926);
         registry.addResourceHandler("/img/**").addResourceLocations("WEB-INF/img/").setCachePeriod(31556926);
-
-
     }
 
     //用默认的servlet来处理静态资源
