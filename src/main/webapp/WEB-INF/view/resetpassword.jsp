@@ -1,21 +1,24 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>图书借阅系统 | 确认邮箱</title>
+  <title> 图书借阅系统 | 重置密码</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="../css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../css/blue.css">
+ <!-- Bootstrap 3.3.7 -->
+ <link rel="stylesheet" href="../css/bootstrap.min.css">
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="../css/font-awesome.min.css">
+ <!-- Ionicons -->
+ <link rel="stylesheet" href="../css/ionicons.min.css">
+ <!-- Theme style -->
+ <link rel="stylesheet" href="../css/AdminLTE.min.css">
+ <!-- iCheck -->
+ <link rel="stylesheet" href="../css/blue.css">
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,15 +37,18 @@
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">确认邮箱</p>
+    <p class="login-box-msg">重置密码</p>
 
     <form action="../../index.html" method="post">
      
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="验证码">
-        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+        <input type="password" class="form-control" placeholder="密码">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      
+      <div class="form-group has-feedback">
+          <input type="password" class="form-control" placeholder="确认密码">
+          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>          
+      </div>
       <div class="row">
        
         <!-- /.col -->
@@ -65,6 +71,7 @@
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
+
 <!-- jQuery 3 -->
 <script src="../js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->

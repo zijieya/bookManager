@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -174,7 +176,7 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>-->
-        <li ><a href="../../index.html"><i class="fa fa-search"></i> 查找图书</a></li>
+        <li ><a  href="../../index.html"><i class="fa fa-search"></i> 查找图书</a></li>
         <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 续借书籍</a></li>
         <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 还书</a></li>
         <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 借阅历史</a></li>
@@ -194,8 +196,8 @@ desired effect
         <small>Optional description</small>
       </h1>-->
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
-        <li class="active">续借书籍</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
       </ol>
     </section>
 

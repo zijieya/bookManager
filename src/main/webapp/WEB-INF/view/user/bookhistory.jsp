@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -7,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>图书借阅系统|管理员</title>
+  <title>图书借阅系统</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -174,47 +176,11 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>-->
-        <li ><a  href="../../index.html"><i class="fa fa-search"></i> 首页</a></li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-book"></i> <span>图书管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu ">
-            <li class="active"><a  href="../../index.html"><i class="fa fa-search"></i> 增加书籍</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 删除书籍</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 修改书籍信息</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>用户管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> 用户列表</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 增加用户</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 删除用户</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 用户黑名单</a></li>                        
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>借阅管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 借书管理</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 续借管理</a></li> 
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 超期管理</a></li>                        
-          </ul>
-        </li>
+        <li ><a  href="../../index.html"><i class="fa fa-search"></i> 查找图书</a></li>
+        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 续借书籍</a></li>
+        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 还书</a></li>
+        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 借阅历史</a></li>
+        <li ><a  href="../../index.html"><i class="fa fa-search"></i> 修改账号信息</a></li>        
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -230,8 +196,8 @@ desired effect
         <small>Optional description</small>
       </h1>-->
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>用户</a></li>
+        <li class="active">借阅历史</li>
       </ol>
     </section>
 
