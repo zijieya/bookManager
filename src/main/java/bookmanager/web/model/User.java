@@ -1,12 +1,20 @@
 package bookmanager.web.model;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+@Component
 public class User {
     private int userId;//用户id
+   // @NotNull
     private String username;//用户名
+  //  @NotNull
     private String email;//邮箱
+    @NotNull
+    @Size(min = 6 ,max=8)
     private String password;//密码
     private String avatarUri;//头像
     private int isValidate;//是否验证
