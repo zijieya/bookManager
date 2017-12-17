@@ -62,7 +62,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>图书</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -115,7 +115,7 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">用户信息</a>
+                  <a href="${pageContext.request.contextPath }/user/profile.jsp" class="btn btn-default btn-flat">用户信息</a>
                 </div>
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">注销</a>
@@ -220,7 +220,7 @@ desired effect
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2017 <a href="#"></a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
