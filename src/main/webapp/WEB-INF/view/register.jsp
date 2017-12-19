@@ -80,7 +80,7 @@
         Google+</a>
     </div>
 -->
-    <a href="login.jsp" class="text-center">我已经注册</a>
+    <a href="/" class="text-center">我已经注册</a>
   </div>
   <!-- /.form-box -->
 </div>

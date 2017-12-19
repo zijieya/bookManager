@@ -58,7 +58,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <input type="submit" class="btn btn-primary btn-block btn-flat">
+          <input type="submit" class="btn btn-primary btn-block btn-flat" value="登录">
         </div>
         <!-- /.col -->
       </div>
@@ -73,8 +73,8 @@
     </div>-->
     <!-- /.social-auth-links -->
 
-    <a href="${pageContext.request.contextPath }/forget.jsp">忘记密码</a><br>
-    <a href="${pageContext.request.contextPath }/register.jsp" class="text-center">注册</a>
+    <a href="${pageContext.request.contextPath }/forget">忘记密码</a><br>
+    <a href="${pageContext.request.contextPath }/register" class="text-center">注册</a>
 
   </div>
   <!-- /.login-box-body -->
