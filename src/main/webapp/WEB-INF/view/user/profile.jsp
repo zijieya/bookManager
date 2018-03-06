@@ -102,12 +102,8 @@ desired effect
                           <label for="passwordagain">确认密码</label>
                           <input type="password" class="form-control" id="passwordagain">
                         </div>
-                        <div class="form-group">
-                          <label for="summary">确认</label>
-                          <input type="text"  class="form-control" id="summary">
-                        </div>
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">确认修改！</button>
                           </div>
                     </form>
               </div>

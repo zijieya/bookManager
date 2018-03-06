@@ -87,10 +87,6 @@ desired effect
 
   <!-- Main Footer -->
 <jsp:include page="foot.jsp"></jsp:include>
-      </div>
-
-        </form>
-      </div>
       <!-- /.tab-pane -->
     </div>
   </aside>

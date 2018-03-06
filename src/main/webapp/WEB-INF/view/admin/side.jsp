@@ -17,7 +17,7 @@
                 <img src="../../img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>${user.username}</p>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -52,7 +52,7 @@
                    <li><a href="#">Link in level 2</a></li>
                  </ul>
                </li>-->
-            <li ><a  href="../../index.html"><i class="fa fa-search"></i> 首页</a></li>
+            <li ><a  href="${pageContext.request.contextPath }/admin/index"><i class="fa fa-search"></i> 首页</a></li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-book"></i> <span>图书管理</span>
@@ -61,9 +61,9 @@
             </span>
                 </a>
                 <ul class="treeview-menu ">
-                    <li class="active"><a  href="../../index.html"><i class="fa fa-search"></i> 增加书籍</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 删除书籍</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 修改书籍信息</a></li>
+                    <li class="active"><a  href=".${pageContext.request.contextPath }/admin/addbook"><i class="fa fa-search"></i> 增加书籍</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/deletebook"><i class="fa fa-circle-o"></i> 删除书籍</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/bookmanage"><i class="fa fa-circle-o"></i> 修改书籍信息</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -74,10 +74,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../../index.html"><i class="fa fa-circle-o"></i> 用户列表</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 增加用户</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 删除用户</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 用户黑名单</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> 用户列表</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/adduser"><i class="fa fa-circle-o"></i> 增加用户</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/deleteuser"><i class="fa fa-circle-o"></i> 删除用户</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/blacklistuser"><i class="fa fa-circle-o"></i> 用户黑名单</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -88,9 +88,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 借书管理</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 续借管理</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 超期管理</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/rebookmanage"><i class="fa fa-circle-o"></i> 续借管理</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/overduemanage"><i class="fa fa-circle-o"></i> 超期管理</a></li>
                 </ul>
             </li>
         </ul>

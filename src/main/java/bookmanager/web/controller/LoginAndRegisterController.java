@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
+// 登录注册控制器
 @Controller
 public class LoginAndRegisterController {
     private UserDaoService userDaoService;
@@ -33,10 +33,21 @@ public class LoginAndRegisterController {
         else
             return "login";
     }
-    @RequestMapping(value = "/register.jsp",method = GET)
+    @RequestMapping(value = "/register",method = GET)
     public String register(){
        return "register";
     }
-
+    @RequestMapping(value = "/forget",method = GET)
+    public String forget(){
+        return "forget";
+    }
+    @RequestMapping(value = "/confirm",method = GET)
+    public String comfirm(){
+        return "confirm";
+    }
+    @RequestMapping(value = "/resetpassword",method = GET)
+    public String resetPassword(){
+        return "resetpassword";
+    }
 
 }

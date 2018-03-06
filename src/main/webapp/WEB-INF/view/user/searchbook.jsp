@@ -81,10 +81,13 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <div class="row">
+        <h3>修改账号信息</h3>
+        <div class="box  box-primary">
+      <div class="row">
             <div class="col-md-12">
                 <table id="table2"></table>
             </div>
+        </div>
         </div>
     </section>
     <!-- /.content -->
@@ -94,8 +97,6 @@ desired effect
   <!-- Main Footer -->
 <jsp:include page="foot.jsp"></jsp:include>
       </div>
-
-        </form>
       </div>
       <!-- /.tab-pane -->
     </div>
@@ -106,8 +107,8 @@ desired effect
 <script src="../../js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/adminlte.min.js"></script>
-<script src="../node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
-<script src="../node_modules/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../js/bootstrap-table.min.js"></script>
+<script src="../../js/bootstrap-table-zh-CN.min.js"></script>
 <script>
     $('#table2').bootstrapTable({
      /* method:"get",
