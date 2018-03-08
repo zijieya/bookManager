@@ -7,6 +7,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 //用户控制器
 @Controller
 public class UserController {
+    public UserController(){
+
+    }
     @RequestMapping(value = "/user/profile",method = GET)
     public String profile(){
         return "user/profile";
@@ -26,5 +29,10 @@ public class UserController {
     @RequestMapping(value = "/user/bookhistory",method = GET)
     public String bookHistory(){
         return "user/bookhistory";
+    }
+    @RequestMapping(value = "/user/showbook",method = GET)
+    public String showBook(){
+
+        return "user/searchbook";
     }
 }

@@ -32,16 +32,16 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-   <b>点到系统</b>
+   <b>图书借阅系统</b>
   </div>
 
   <div class="register-box-body">
     <p class="login-box-msg">确认邮箱</p>
 
-    <form action="../../index.html" method="post">
+    <form action="${pageContext.request.contextPath}/resetpassword" method="post">
      
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="验证码">
+        <input type="text" class="form-control" name="number" placeholder="验证码">
         <span class="glyphicon glyphicon-ok form-control-feedback"></span>
       </div>
       

@@ -39,21 +39,21 @@
   <div class="register-box-body">
     <p class="login-box-msg">注册</p>
 
-    <form action="../../index.html" method="post">
+    <form action="${pageContext.request.contextPath }/register" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="名字">
+        <input type="text" class="form-control" placeholder="名字" name="username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="邮箱">
+        <input type="email" class="form-control" placeholder="邮箱" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码">
+        <input type="password" class="form-control" placeholder="密码" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="确认密码">
+        <input type="password" class="form-control" placeholder="确认密码" name="password2">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="row">

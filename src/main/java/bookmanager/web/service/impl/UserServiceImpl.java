@@ -39,9 +39,10 @@ public class UserServiceImpl implements UserService {
     /**
      * @description 发送验证码
      * @param email
+     * @return int
      */
     @Override
-    public void getCode(String email) {
+    public int getCode(String email) {
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
         Random random=new Random();
         int number=random.nextInt(100000)+1;
@@ -52,5 +53,30 @@ public class UserServiceImpl implements UserService {
         simpleMailMessage.setSubject("验证码");
         simpleMailMessage.setText(message);
         javaMailSender.send(simpleMailMessage);
+        return number;
+    }
+
+    /**
+     *
+     * @param email
+     * @return User
+     */
+    @Override
+    public User getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
+    /**
+     *
+     * @param user
+     */
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public void insertUser(User user) {
+        userDao.insertUser(user);
     }
 }

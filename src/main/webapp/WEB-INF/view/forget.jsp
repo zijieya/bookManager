@@ -39,9 +39,9 @@
   <div class="register-box-body">
     <p class="login-box-msg">找回密码</p>
 
-    <form action="../../index.html" method="post">
+    <form action="${pageContext.request.contextPath }/confirm" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="邮箱">
+        <input type="email" class="form-control" placeholder="邮箱" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
      

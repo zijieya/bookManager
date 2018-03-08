@@ -33,20 +33,20 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-   <b>点到系统</b>
+   <b>图书借阅系统</b>
   </div>
 
   <div class="register-box-body">
     <p class="login-box-msg">重置密码</p>
 
-    <form action="../../index.html" method="post">
+    <form action="${pageContext.request.contextPath}/newpassword" method="post">
      
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码">
+        <input type="password" class="form-control" name="password" placeholder="密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="确认密码">
+          <input type="password" class="form-control" name="password2" placeholder="确认密码">
           <span class="glyphicon glyphicon-log-in form-control-feedback"></span>          
       </div>
       <div class="row">
