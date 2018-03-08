@@ -14,7 +14,7 @@ public class DataSourceConfiguration {
     public DataSource dataSource(){
         BasicDataSource ds=new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://119.29.151.185:3306/spring_BookManager");
+        ds.setUrl("jdbc:mysql://119.29.151.185:3306/spring_BookManager?useUnicode=true&characterEncoding=utf-8");
         ds.setUsername("spring");
         ds.setPassword("741258963");
         return ds;
