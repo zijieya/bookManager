@@ -8,7 +8,7 @@ sourceCompatibility = 1.8
 
 repositories {
     maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-   // mavenCentral()
+   // mavenCentral().
 }
 
 dependencies {
@@ -25,6 +25,12 @@ dependencies {
     compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
     compile 'org.springframework.security:spring-security-config:4.2.3.RELEASE'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
+    // https://mvnrepository.com/artifact/jstl/jstl
+    compile group: 'jstl', name: 'jstl', version: '1.2'
+    // https://mvnrepository.com/artifact/javax.mail/mail
+    compile group: 'javax.mail', name: 'mail', version: '1.4.1'
+    // https://mvnrepository.com/artifact/org.springframework/spring-context-support
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.13.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.13.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
