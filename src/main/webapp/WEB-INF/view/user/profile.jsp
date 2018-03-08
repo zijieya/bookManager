@@ -84,7 +84,7 @@ desired effect
 
           <div class="box  box-primary">
             <div class="row">
-              <div class="col-md-4 col-offset-md-4">
+              <div class="col-md-offset-3 col-md-6">
                   <form>
                       <div class="form-group">
                         <label for="email">邮箱地址</label>
@@ -102,8 +102,8 @@ desired effect
                           <label for="passwordagain">确认密码</label>
                           <input type="password" class="form-control" id="passwordagain">
                         </div>
-                        <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">确认修改！</button>
+                        <div class="col-xs-offset-4 col-xs-3">
+                            <button type="submit" class="btn btn-danger btn-block btn-flat">确认修改！</button>
                           </div>
                     </form>
               </div>
