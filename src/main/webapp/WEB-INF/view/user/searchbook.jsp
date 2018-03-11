@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -13,7 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../node_modules/bootstrap-table/dist/bootstrap-table.min.css">
+  <!--bootstrap table-->
+  <link rel="stylesheet" href="../../css/bootstrap-table.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -81,8 +82,21 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <h3>修改账号信息</h3>
+        <h3>查询书籍</h3>
         <div class="box  box-primary">
+          <div class="row">
+            <form id="formSearch" class="form-horizontal">
+              <div class="form-group" style="margin-top:15px">
+                <label class="control-label col-sm-1" for="bookname">书籍名称</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="bookname">
+                </div>
+                <div class="col-sm-4" style="text-align:left;">
+                  <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary" onclick="searchBook()">查询</button>
+                </div>
+              </div>
+            </form>
+          </div>
       <div class="row">
             <div class="col-md-12">
                 <table id="table2"></table>
@@ -93,7 +107,6 @@ desired effect
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <!-- Main Footer -->
 <jsp:include page="foot.jsp"></jsp:include>
       </div>
@@ -107,32 +120,31 @@ desired effect
 <script src="../../js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/adminlte.min.js"></script>
-<script src="../../js/bootstrap-table.min.js"></script>
-<script src="../../js/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../js/bootstrap-table.js"></script>
+<script src="../../js/bootstrap-table-zh-CN.js"></script>
 <script>
+    var bookNames=null;
     $('#table2').bootstrapTable({
-     /* method:"get",
-      url: "/resourceServlet?method=listResource",*/
+        method:"get",
+        url: "/user/searchbooks",
         dataType: "json",
         striped: true,
-      //  showColumns: true,
-      classes:'table table-hover table-no-bordered',
-      search:true,
-      pagination: true,
-      clickToSelect: true,
-      columns: [{
+        smartDisplay:true,
+        queryParamsType:'limit',
+        pagination: true,
+        sidePagination: "server",
+        pageNumber:1,
+        pageSize:5,
+        pageList:[5,10],
+        toolbar: '#toolbar',
+        clickToSelect: true,
+        classes:'table table-hover table-no-bordered',
+        columns: [{
           field: 'bookId',
-          title: '图书编号',
-          sortable:true,
-          cardVisible:true
+          title: '图书编号'
       }, {
-          field: 'ISBNId',
-          title: 'ISBN编号',
-          sortable:true
-      }, {
-          field: ' bookName',
-          title: '图书名称',
-          sortable:true
+          field: 'bookName',
+          title: '图书名称'
       },{
           field:'bookAuthor',
           title:'图书作者'
@@ -141,39 +153,52 @@ desired effect
           title:'图书出版社'
       },{
         field:'bookDescription',
-        title:'图书简介',
-        sortable:true
+        title:'图书简介'
       },{
-         field:'integration',
-         title:'积分' ,
-         sortable:true
-      },
-      {
-         field:'resourcePath',
-         title:'下载' ,
-         align:'center',
-         formatter : operateFormatter,
-      },
-      ],
-      
-      onClickCell:function(field, value, row, $element){
-          if(field=="resourcePath"){
-            /*  console.log(field);
-              console.log(value);
-              console.log(row);
-              console.log($element);
-              console.log(row.resourceId);*/
-      window.location.href="/resourceServlet?method=getResource&resourceId="+row.resourceId.toString();
-    }
+          field:'bookPrice',
+          title:'价格'
+      },{
+          field:'remain',
+          title:'剩余数量'
 
-      },
-  });
-  function operateFormatter(value, row, index) {
-      return [
-              '<button  type="button" class="btn btn-danger btn-xs">下载</button>', ]
-              .join('');
+      },{
+            field:'Button',
+            title:'借阅',
+            formatter :function operateFormatter(value, row, index) {
+            return [
+                '<button name="borrow" type="button" class="btn btn-danger ">借阅</button>']
+                .join('');
+
+    }
+        }
+      ],
+        queryParams:function (params) {
+            if($("#bookname").val()){
+                return {
+                    pageSize:params.limit,
+                    pageNumber:params.offset/params.limit,
+                    bookName:$("#bookname").val()
+                }
+            }
+            else return {
+                pageSize:params.limit,
+                pageNumber:params.offset/params.limit
+            }
+
+
+        },
+        onClickCell:function(field, value, row, $element){
+            if(field=="Button"){
+               window.location.href="/user/borrowbook/"+row.bookId;//跳转到借书页面
+            }
+        }
+    })
+  function searchBook() {
+      $("#table2").bootstrapTable('refresh');
   }
- 
+  
+
+
   </script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

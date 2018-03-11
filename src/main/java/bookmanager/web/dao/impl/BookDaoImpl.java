@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 public class BookDaoImpl implements BookDao {
     private JdbcOperations jdbcOperations;
+    @Autowired
+    BookDao bookDao;
     //构造器注入
     @Autowired
     public BookDaoImpl(JdbcOperations jdbcOperations){
@@ -23,8 +25,8 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void updateBook(Book book) {
         try{
-            String sql="update book set book_name=?,book_author=?,book_press=?,book_price=?,book_description=?,book_photouri=?,is_borrowed=? where bookid=?";
-            Object[] params={book.getBookName(),book.getBookAuthor(),book.getBookPress(),book.getBookPrice(),book.getBookDescription(),book.getBookPhotoUri(),book.getIsBorrowed(),book.getBookId()};
+            String sql="update book set book_name=?,book_author=?,book_press=?,book_price=?,book_description=?,book_photouri=?,remain=? where bookid=?";
+            Object[] params={book.getBookName(),book.getBookAuthor(),book.getBookPress(),book.getBookPrice(),book.getBookDescription(),book.getBookPhotoUri(),book.getRemain(),book.getBookId()};
             jdbcOperations.update(sql,params);
         }
         catch (EmptyResultDataAccessException ex)
@@ -36,8 +38,8 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void insertBook(Book book) {
         try{
-            String sql="insert into book(book_name,book_author,book_press,book_price,book_description,book_photouri,is_borrowed)";
-            Object[] params={book.getBookName(),book.getBookAuthor(),book.getBookPress(),book.getBookPrice(),book.getBookDescription(),book.getBookPhotoUri(),book.getIsBorrowed()};
+            String sql="insert into book(book_name,book_author,book_press,book_price,book_description,book_photouri,remain)";
+            Object[] params={book.getBookName(),book.getBookAuthor(),book.getBookPress(),book.getBookPrice(),book.getBookDescription(),book.getBookPhotoUri(),book.getRemain()};
             jdbcOperations.update(sql,params);
         }
         catch (EmptyResultDataAccessException ex){
@@ -60,8 +62,88 @@ public class BookDaoImpl implements BookDao {
                     book.setBookPress(rs.getString("book_press"));
                     book.setBookPrice(rs.getFloat("book_price"));
                     book.setBookDescription(rs.getString("book_description"));
-                    book.setBookPhotoUri(rs.getString("book-photouri"));
-                    book.setIsBorrowed(rs.getInt("is_borrowed"));
+                    book.setBookPhotoUri(rs.getString("book_photouri"));
+                    book.setRemain(rs.getInt("remain"));
+                    return book;
+                }
+            });
+        }
+        catch (EmptyResultDataAccessException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Book> listBookByNameAndPage(String bookName,int startIndex,int end) {
+        try{
+            String sql="select * from book where book_name=? limit ?,?";
+            Object[] params={bookName,startIndex,end};
+            return jdbcOperations.query(sql, params, new RowMapper<Book>() {
+                @Override
+                public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    Book book=new Book();
+                    book.setBookId(rs.getInt("bookid"));
+                    book.setBookName(rs.getString("book_name"));
+                    book.setBookAuthor(rs.getString("book_author"));
+                    book.setBookPress(rs.getString("book_press"));
+                    book.setBookPrice(rs.getFloat("book_price"));
+                    book.setBookDescription(rs.getString("book_description"));
+                    book.setBookPhotoUri(rs.getString("book_photouri"));
+                    book.setRemain(rs.getInt("remain"));
+                    return book;
+                }
+            });
+        }
+        catch (EmptyResultDataAccessException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Book> listAllBook() {
+        try{
+            String sql="select * from book ";
+            return jdbcOperations.query(sql, new RowMapper<Book>() {
+                @Override
+                public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    Book book=new Book();
+                    book.setBookId(rs.getInt("bookid"));
+                    book.setBookName(rs.getString("book_name"));
+                    book.setBookAuthor(rs.getString("book_author"));
+                    book.setBookPress(rs.getString("book_press"));
+                    book.setBookPrice(rs.getFloat("book_price"));
+                    book.setBookDescription(rs.getString("book_description"));
+                    book.setBookPhotoUri(rs.getString("book_photouri"));
+                    book.setRemain(rs.getInt("remain"));
+                    return book;
+                }
+            });
+        }
+        catch (EmptyResultDataAccessException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Book> listBook(int startIndex, int pageSize) {
+        try{
+            String sql="select * from book limit ?,?  ";
+            Object[] params={startIndex,pageSize};
+            return jdbcOperations.query(sql,params, new RowMapper<Book>() {
+                @Override
+                public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    Book book=new Book();
+                    book.setBookId(rs.getInt("bookid"));
+                    book.setBookName(rs.getString("book_name"));
+                    book.setBookAuthor(rs.getString("book_author"));
+                    book.setBookPress(rs.getString("book_press"));
+                    book.setBookPrice(rs.getFloat("book_price"));
+                    book.setBookDescription(rs.getString("book_description"));
+                    book.setBookPhotoUri(rs.getString("book_photouri"));
+                    book.setRemain(rs.getInt("remain"));
                     return book;
                 }
             });
@@ -87,8 +169,8 @@ public class BookDaoImpl implements BookDao {
                     book.setBookPress(rs.getString("book_press"));
                     book.setBookPrice(rs.getFloat("book_price"));
                     book.setBookDescription(rs.getString("book_description"));
-                    book.setBookPhotoUri(rs.getString("book-photouri"));
-                    book.setIsBorrowed(rs.getInt("is_borrowed"));
+                    book.setBookPhotoUri(rs.getString("book_photouri"));
+                    book.setRemain(rs.getInt("remain"));
                     return book;
                 }
             });
@@ -100,28 +182,12 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> listAllBook() {
-        try{
-            String sql="select * from book ";
-            return jdbcOperations.query(sql, new RowMapper<Book>() {
-                @Override
-                public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    Book book=new Book();
-                    book.setBookId(rs.getInt("bookid"));
-                    book.setBookName(rs.getString("book_name"));
-                    book.setBookAuthor(rs.getString("book_author"));
-                    book.setBookPress(rs.getString("book_press"));
-                    book.setBookPrice(rs.getFloat("book_price"));
-                    book.setBookDescription(rs.getString("book_description"));
-                    book.setBookPhotoUri(rs.getString("book-photouri"));
-                    book.setIsBorrowed(rs.getInt("is_borrowed"));
-                    return book;
-                }
-            });
-        }
-        catch (EmptyResultDataAccessException ex){
-            ex.printStackTrace();
-            return null;
-        }
+    public int getBookNumber() {
+        return bookDao.listAllBook().size();
+    }
+
+    @Override
+    public int getBookNumber(String bookName) {
+        return bookDao.listBookByName(bookName).size();
     }
 }

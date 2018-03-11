@@ -8,7 +8,7 @@ public class Book {
     private  float bookPrice;//图书价格
     private String bookDescription;//图书描述
     private String bookPhotoUri;//图书图片地址
-    private int  isBorrowed;//是否被借阅
+    private int  remain;//剩余书籍数量
 
     public int getBookId() {
         return bookId;
@@ -66,11 +66,11 @@ public class Book {
         this.bookPhotoUri = bookPhotoUri;
     }
 
-    public int getIsBorrowed() {
-        return isBorrowed;
+    public int getRemain() {
+        return remain;
     }
 
-    public void setIsBorrowed(int isBorrowed) {
-        this.isBorrowed = isBorrowed;
+    public void setRemain(int remain) {
+        this.remain = remain;
     }
 }

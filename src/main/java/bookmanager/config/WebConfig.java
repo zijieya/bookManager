@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 //启用springmvc
 //配置DispatcherServlet上下文
 @Configuration
@@ -26,16 +25,6 @@ public class WebConfig  extends WebMvcConfigurerAdapter{
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
-    //配置user目录下的视图解析器
-   /* @Bean
-    public ViewResolver ViewResolver(){
-        InternalResourceViewResolver resolver=new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/view/user");
-        resolver.setSuffix(".jsp");
-        resolver.setExposeContextBeansAsAttributes(true);
-        return resolver;
-    }*/
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("WEB-INF/css/").setCachePeriod(31556926);
