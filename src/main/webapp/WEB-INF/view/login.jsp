@@ -39,7 +39,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">登录 开启新的旅程</p>
 
-    <form action="${pageContext.request.contextPath }/login.do" method="post">
+    <form action="${pageContext.request.contextPath }/login" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="邮箱" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

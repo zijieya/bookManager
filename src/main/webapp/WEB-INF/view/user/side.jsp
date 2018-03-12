@@ -41,8 +41,7 @@
         <ul class="sidebar-menu" data-widget="tree">
 
             <li ><a  href="${pageContext.request.contextPath }/user/searchbook"><i class="fa fa-search"></i> 查找图书</a></li>
-            <li><a href="${pageContext.request.contextPath }/user/rebook"><i class="fa fa-circle-o"></i> 续借书籍</a></li>
-            <li><a href="${pageContext.request.contextPath }/user/returnbook"><i class="fa fa-circle-o"></i> 还书</a></li>
+            <li ><a  href="${pageContext.request.contextPath }/user/borrowedbook"><i class="fa fa-search"></i> 已借图书</a></li>
             <li><a href="${pageContext.request.contextPath }/user/bookhistory"><i class="fa fa-circle-o"></i> 借阅历史</a></li>
             <li ><a href="${pageContext.request.contextPath }/user/profile"><i class="fa fa-search"></i> 修改账号信息</a></li>
         </ul>

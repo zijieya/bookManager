@@ -30,13 +30,13 @@ public class LoginAndRegisterController {
         return "login";
     }
    @RequestMapping(value
-           = "/login.do",method = POST)
+           = "/login",method = POST)
    public String login(  User user, Model model){
         User user1= userService.getLoginUser(user);
         if(user1!=null)
         {
             model.addAttribute("user",user1);//将数据传入模型中
-            return "user/profile";
+            return "user/searchbook";//登录成功则跳转到查找书籍界面
         }
         else
             return "login";

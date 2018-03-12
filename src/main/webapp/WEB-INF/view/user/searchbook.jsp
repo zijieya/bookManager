@@ -82,7 +82,7 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <h3>查询书籍</h3>
+        <h3>查询图书</h3>
         <div class="box  box-primary">
           <div class="row">
             <form id="formSearch" class="form-horizontal">
@@ -123,7 +123,6 @@ desired effect
 <script src="../../js/bootstrap-table.js"></script>
 <script src="../../js/bootstrap-table-zh-CN.js"></script>
 <script>
-    var bookNames=null;
     $('#table2').bootstrapTable({
         method:"get",
         url: "/user/searchbooks",
@@ -176,20 +175,24 @@ desired effect
             if($("#bookname").val()){
                 return {
                     pageSize:params.limit,
-                    pageNumber:params.offset/params.limit,
+                    pageNumber:params.offset/params.limit+1,
                     bookName:$("#bookname").val()
                 }
             }
             else return {
                 pageSize:params.limit,
-                pageNumber:params.offset/params.limit
+                pageNumber:params.offset/params.limit+1
             }
 
 
         },
         onClickCell:function(field, value, row, $element){
             if(field=="Button"){
-               window.location.href="/user/borrowbook/"+row.bookId;//跳转到借书页面
+                if(row.remain==0){//剩余数量为0则跳出警告 反之则跳转页面
+                    alert("该图书已被借光！")
+                }
+                else
+                    window.location.href="/user/borrowbook/"+row.bookId;//跳转到借书页面
             }
         }
     })

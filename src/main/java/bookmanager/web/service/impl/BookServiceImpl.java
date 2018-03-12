@@ -39,5 +39,15 @@ public class BookServiceImpl implements BookService {
         else
             return bookDao.listBookByName(bookName).size();
     }
+
+    @Override
+    public Book getBook(int bookId) {
+        return bookDao.getBook(bookId);
+    }
+
+    @Override
+    public void updateBook(Book book) {
+        bookDao.updateBook(book);
+    }
 }
 
