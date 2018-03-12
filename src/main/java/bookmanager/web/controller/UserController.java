@@ -6,6 +6,7 @@ import bookmanager.web.model.Borrow;
 import bookmanager.web.model.User;
 import bookmanager.web.service.BookService;
 import bookmanager.web.service.BorrowService;
+import bookmanager.web.service.UserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class UserController {
     BookService bookService;
     @Autowired
     BorrowService borrowService;
+    @Autowired
+    UserService userService;
     public UserController(){
 
     }
@@ -123,5 +126,18 @@ public class UserController {
         return gson.toJson(file);
     }
 
-
+    /**
+     * 修改密码
+     * @return
+     */
+    @RequestMapping(value = "/user/password",method = GET)
+    public String password(){
+        return "/user/password";
+    }
+    @RequestMapping(value = "/user/password",method = POST)
+    public String password(@RequestParam("password") String password,@SessionAttribute("user") User user){
+        user.setPassword(password);//设置密码
+        userService.updateUser(user);//更新用户信息
+        return "login";//返回首页
+    }
 }

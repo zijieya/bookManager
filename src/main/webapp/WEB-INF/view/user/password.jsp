@@ -68,7 +68,7 @@ desired effect
     <section class="content-header">
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
-        <li class="active">修改账号信息</li>
+        <li class="active">修改密码</li>
       </ol>
     </section>
 
@@ -80,27 +80,19 @@ desired effect
         -------------------------->
         <div class="row">
         <div class="  col-md-12">
-            <h3>修改账号信息</h3>
+            <h3>修改密码</h3>
 
           <div class="box  box-primary">
             <div class="row">
               <div class="col-md-offset-3 col-md-6">
-                  <form>
+                  <form action="/user/password" method="post">
                       <div class="form-group">
-                        <label for="email">邮箱地址</label>
-                        <input type="email" class="form-control" id="email" >
-                      </div>
-                      <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" class="form-control" id="username">
-                      </div>
-                      <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password">
+                        <label for="password">新密码</label>
+                        <input type="password" class="form-control" name="password" id="password">
                       </div>
                       <div class="form-group">
                           <label for="passwordagain">确认密码</label>
-                          <input type="password" class="form-control" id="passwordagain">
+                          <input type="password" class="form-control" name="password1" id="passwordagain">
                         </div>
                         <div class="col-xs-offset-4 col-xs-3">
                             <button type="submit" class="btn btn-danger btn-block btn-flat">确认修改！</button>
@@ -121,10 +113,8 @@ desired effect
 <jsp:include page="foot.jsp"></jsp:include>
 
       </div>
-        </form>
-      </div>
-    </div>
-  </aside>
+
+
 
 
 <!-- jQuery 3 -->
