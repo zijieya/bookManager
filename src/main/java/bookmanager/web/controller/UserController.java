@@ -70,11 +70,8 @@ public class UserController {
     @RequestMapping(value = "/user/searchbooks",produces = "application/json; charset=utf-8",method = GET)
     @ResponseBody
     public String searchBook(@RequestParam(value = "bookName",required=false) String bookName,@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber) {
-      /*  int total;//总条数
-        if(bookName==null)
-            total=bookService.getBookNumber();
-        else*/
-           int total=bookService.getBookNumber(bookName);
+
+        int total=bookService.getBookNumber(bookName);
         List<Book> bookList=bookService.findBookByPage(bookName,pageNumber,pageSize);
         Gson gson=new Gson();
         Map<String,Object> file=new HashMap<String, Object>() ;
@@ -122,7 +119,6 @@ public class UserController {
         Map<String,Object> file=new HashMap<String, Object>() ;
         file.put("total",total);
         file.put("rows",borrowList1);
-        System.out.println(gson.toJson(file));
         return gson.toJson(file);
     }
 

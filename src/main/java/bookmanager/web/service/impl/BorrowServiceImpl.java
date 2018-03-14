@@ -2,18 +2,12 @@ package bookmanager.web.service.impl;
 
 import bookmanager.web.dao.BookDao;
 import bookmanager.web.dao.BorrowDao;
-import bookmanager.web.model.Book;
-import bookmanager.web.model.Borrow;
-import bookmanager.web.model.Page;
-import bookmanager.web.model.User;
+import bookmanager.web.model.*;
 import bookmanager.web.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,6 +48,8 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public void deleteBorrow(int borrowId) {
+        Borrow borrow=borrowDao.getBorrow(borrowId);//获取借阅信息
+        borrowDao.updateBorrow(borrow);
         borrowDao.deleteBorrow(borrowId);
     }
 
@@ -61,11 +57,12 @@ public class BorrowServiceImpl implements BorrowService {
     public void reBorrowBook(int borrowId) {
         //获得那条借阅信息
         Borrow borrow=borrowDao.getBorrow(borrowId);
+        System.out.println(borrow.getBookId());
         borrow.setReBorrowTimes(borrow.getReBorrowTimes()+1);//续借次数加1
         //更新还书时间
         Timestamp timestamp=borrow.getReturnTime();//获得还书时间栈
-       Timestamp timestamp1=new Timestamp(timestamp.getTime()+SEVENDAYS);
-       borrow.setReturnTime(timestamp1);
+        Timestamp timestamp1=new Timestamp(timestamp.getTime()+SEVENDAYS);
+        borrow.setReturnTime(timestamp1);
         borrowDao.updateBorrow(borrow);
     }
 }

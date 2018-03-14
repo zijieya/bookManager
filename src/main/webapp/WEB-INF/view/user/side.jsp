@@ -42,7 +42,6 @@
 
             <li ><a  href="${pageContext.request.contextPath }/user/searchbook"><i class="fa fa-search"></i> 查找图书</a></li>
             <li ><a  href="${pageContext.request.contextPath }/user/borrowedbook"><i class="fa fa-search"></i> 已借图书</a></li>
-            <li><a href="${pageContext.request.contextPath }/user/bookhistory"><i class="fa fa-circle-o"></i> 借阅历史</a></li>
             <li ><a href="${pageContext.request.contextPath }/user/password"><i class="fa fa-search"></i> 修改密码</a></li>
         </ul>
         <!-- /.sidebar-menu -->

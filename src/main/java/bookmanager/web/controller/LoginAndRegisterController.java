@@ -72,6 +72,13 @@ public class LoginAndRegisterController {
         else
             return "confirm";
     }
+
+    /**
+     * 更新密码
+     * @param user
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "/newpassword",method = POST)
     public String getNewPassword(@SessionAttribute("user") User user ,String password){
         user.setPassword(password);
