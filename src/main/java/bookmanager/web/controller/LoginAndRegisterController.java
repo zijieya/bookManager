@@ -1,6 +1,8 @@
 package bookmanager.web.controller;
 
 import bookmanager.web.model.User;
+import bookmanager.web.model.UserRole;
+import bookmanager.web.service.UserRoleService;
 import bookmanager.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,6 +23,8 @@ public class LoginAndRegisterController {
     JavaMailSender javaMailSender; //字段注入
     private UserService userService;
     @Autowired
+    UserRoleService userRoleService;
+    @Autowired
     LoginAndRegisterController(UserService userService){
         this.userService = userService;
     }
@@ -35,11 +39,17 @@ public class LoginAndRegisterController {
         User user1= userService.getLoginUser(user);
         if(user1!=null)
         {
+            UserRole userRole=userRoleService.getUserRole(user1.getUserId());//获得用户权限信息
             model.addAttribute("user",user1);//将数据传入模型中
-            return "user/searchbook";//登录成功则跳转到查找书籍界面
+            if(userRole.getUserType()==0){//普通用户
+                return "user/searchbook";//用户登录成功则跳转到查找书籍界面
+            }
+            if(userRole.getUserType()==1){
+                return "admin/index";//管理员登录成功则跳到用户首页
+            }
         }
-        else
-            return "login";
+        return "login";
+
     }
     @RequestMapping(value = "/register",method = GET)
     public String register(){
