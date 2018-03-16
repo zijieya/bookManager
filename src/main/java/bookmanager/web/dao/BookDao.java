@@ -17,4 +17,5 @@ public interface BookDao {
     List<Book> listBookByName(String bookName);//查找书籍
     int getBookNumber();//获得书籍数目
     int getBookNumber(String bookName);
+    void deleteBook(int bookId);//删除图书
 }

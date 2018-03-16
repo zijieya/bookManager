@@ -10,4 +10,6 @@ public interface BookService {
     int getBookNumber(String bookName);//得到某本书的数量
     Book getBook(int bookId);//找到某本书
     void updateBook(Book book);//更新某本书的信息
+    void insertBook(Book book);//增加图书
+    void deleteBook(int bookId);//删除图书
 }

@@ -38,7 +38,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void insertBook(Book book) {
         try{
-            String sql="insert into book(book_name,book_author,book_press,book_price,book_description,book_photouri,remain)";
+            String sql="insert into book(book_name,book_author,book_press,book_price,book_description,book_photouri,remain) VALUE (?,?,?,?,?,?,?)";
             Object[] params={book.getBookName(),book.getBookAuthor(),book.getBookPress(),book.getBookPrice(),book.getBookDescription(),book.getBookPhotoUri(),book.getRemain()};
             jdbcOperations.update(sql,params);
         }
@@ -189,5 +189,17 @@ public class BookDaoImpl implements BookDao {
     @Override
     public int getBookNumber(String bookName) {
         return bookDao.listBookByName(bookName).size();
+    }
+
+    @Override
+    public void deleteBook(int bookId) {
+        try{
+            String sql="delete  from book where bookid=?";
+            Object[] params={bookId};
+            jdbcOperations.update(sql,params);
+        }
+        catch (EmptyResultDataAccessException ex){
+            ex.printStackTrace();
+        }
     }
 }

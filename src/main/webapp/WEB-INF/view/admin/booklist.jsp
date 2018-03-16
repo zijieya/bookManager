@@ -13,6 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <!--bootstrap table-->
+    <link rel="stylesheet" href="../../css/bootstrap-table.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -78,42 +80,27 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-        <h3>增加图书</h3>
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <div class="box box-primary">
-                    <div class="col-xs-offset-2 col-md-8">
-                        <form role="form" action="${pageContext.request.contextPath }/admin/addbook" method="post">
-                            <div class="form-group">
-                                <label>图书名称</label>
-                                <input type="text" class="form-control" id="bookName" name="bookName">
-                            </div>
-                            <div class="form-group">
-                                <label>作者</label>
-                                <input type="text" class="form-control" id="bookAuthor" name="bookAuthor">
-                            </div>
-                            <div class="form-group">
-                                <label>出版社</label>
-                                <input type="text" class="form-control" id="bookPress" name="bookPress">
-                            </div>
-                            <div class="form-group">
-                                <label>价格</label>
-                                <input type="text" class="form-control" id="bookPrice" name="bookPrice">
-                            </div>
-                            <div class="form-group">
-                                <label>图书描述</label>
-                                <input type="text" class="form-control" id="bookDiscription" name="bookDiscription">
-
-                            </div>
-                            <div class="form-group">
-                                <label>剩余数目</label>
-                                <input type="text" class="form-control" id="remain" name="remain">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="确认">
-                            </div>
-                        </form>
+        <h3>图书列表</h3>
+        <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+        <div class="box  box-primary">
+            <div class="row">
+                <form id="formSearch" class="form-horizontal">
+                    <div class="form-group" style="margin-top:15px">
+                        <label class="control-label col-sm-1" for="bookname">书籍名称</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="bookname">
+                        </div>
+                        <div class="col-sm-4" style="text-align:left;">
+                            <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary" onclick="searchBook()">查询</button>
+                        </div>
                     </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="table2"></table>
                 </div>
             </div>
         </div>
@@ -134,9 +121,101 @@ desired effect
 <script src="../../js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/adminlte.min.js"></script>
-
+<script src="../../js/bootstrap-table.js"></script>
+<script src="../../js/bootstrap-table-zh-CN.js"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+    $('#table2').bootstrapTable({
+        method:"get",
+        url: "/admin/listbooks",
+        dataType: "json",
+        striped: true,
+        smartDisplay:true,
+        queryParamsType:'limit',
+        pagination: true,
+        sidePagination: "server",
+        pageNumber:1,
+        pageSize:5,
+        pageList:[5,10],
+        toolbar: '#toolbar',
+        clickToSelect: true,
+        classes:'table table-hover table-no-bordered',
+        columns: [{
+            field: 'bookId',
+            title: '图书编号'
+        }, {
+            field: 'bookName',
+            title: '图书名称'
+        },{
+            field:'bookAuthor',
+            title:'图书作者'
+        },{
+            field:'bookPress',
+            title:'图书出版社'
+        },{
+            field:'bookDescription',
+            title:'图书简介'
+        },{
+            field:'bookPrice',
+            title:'价格'
+        },{
+            field:'remain',
+            title:'剩余数量'
+
+        },{
+            field:'modify',
+            title:'修改',
+            formatter :function operateFormatter(value, row, index) {
+                return [
+                    '<button name="borrow" type="button" class="btn btn-danger ">修改</button>']
+                    .join('');
+
+            }
+        },{
+            field:'delete',
+            title:'删除',
+            formatter :function operateFormatter(value, row, index) {
+                return [
+                    '<button name="borrow" type="button" class="btn btn-danger ">删除</button>']
+                    .join('');
+
+            }
+        }
+        ],
+        queryParams:function (params) {
+            if($("#bookname").val()){
+                return {
+                    pageSize:params.limit,
+                    pageNumber:params.offset/params.limit+1,
+                    bookName:$("#bookname").val()
+                }
+            }
+            else return {
+                pageSize:params.limit,
+                pageNumber:params.offset/params.limit+1
+            }
+
+
+        },
+        onClickCell:function(field, value, row, $element){
+            if(field=="delete"){
+                    window.location.href="/admin/deletebook/"+row.bookId;
+                }
+            if(field=="modify"){
+                window.location.href="/admin/bookmanage/"+row.bookId;
+            }
+
+            }
+
+    })
+    function searchBook() {
+        $("#table2").bootstrapTable('refresh');
+    }
+
+
+
+</script>
 </body>
 </html>

@@ -69,25 +69,60 @@ desired effect
         <small>Optional description</small>
       </h1>-->
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
+        <li class="active">修改图书信息</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
+        <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+        <h3>修改图书信息</h3>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="box box-primary">
+                <div class="col-xs-offset-2 col-md-8">
+                <form role="form" action="${pageContext.request.contextPath }/admin/bookmanage" method="post">
+                    <div class="form-group">
+                        <label>图书名称</label>
+                        <input type="text" class="form-control" id="bookName" name="bookName">
+                    </div>
+                    <div class="form-group">
+                        <label>作者</label>
+                        <input type="text" class="form-control" id="bookAuthor" name="bookAuthor">
+                    </div>
+                    <div class="form-group">
+                        <label>出版社</label>
+                        <input type="text" class="form-control" id="bookPress" name="bookPress">
+                    </div>
+                    <div class="form-group">
+                        <label>价格</label>
+                        <input type="text" class="form-control" id="bookPrice" name="bookPrice">
+                    </div>
+                    <div class="form-group">
+                            <label>图书描述</label>
+                            <input type="text" class="form-control" id="bookDiscription" name="bookDiscription">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-
+                    </div>
+                    <div class="form-group">
+                        <label>剩余数目</label>
+                        <input type="text" class="form-control" id="remain" name="remain">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="确认">
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   <jsp:include page="foot.jsp"></jsp:include>
-      </div>
-        </form>
       </div>
       <!-- /.tab-pane -->
     </div>
