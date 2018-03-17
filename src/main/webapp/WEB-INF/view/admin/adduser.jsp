@@ -70,8 +70,8 @@ desired effect
         <small>Optional description</small>
       </h1>-->
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 管理员</a></li>
+        <li class="active">增加用户</li>
       </ol>
     </section>
 
@@ -81,7 +81,32 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+      <h3>增加用户</h3>
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="box box-primary">
+            <div class="col-xs-offset-2 col-md-8">
+              <form role="form" action="${pageContext.request.contextPath }/admin/adduser" method="post">
+                <div class="form-group">
+                  <label>用户</label>
+                  <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                  <label>邮箱</label>
+                  <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                  <label>密码</label>
+                  <input type="text" class="form-control" id="password" name="password">
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-primary" value="确认">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
@@ -89,9 +114,7 @@ desired effect
 
  <jsp:include page="foot.jsp"></jsp:include>
 
-      </div>
 
-        </form>
       </div>
       <!-- /.tab-pane -->
     </div>

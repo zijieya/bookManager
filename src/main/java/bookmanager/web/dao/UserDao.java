@@ -14,4 +14,5 @@ public interface UserDao {
     User getUserByEmail(String email);//通过邮箱查询用户
     List<User> listAllUser();//列出所有用户
     void deleteUser(int  userId);//通过用户Id删除用户
+    List<User> listUserByPage(int startIndex,int pageSide);//列出某一范围的用户列表
 }

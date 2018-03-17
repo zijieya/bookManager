@@ -204,4 +204,29 @@ public class UserDaoImpl  implements UserDao {
         }
     }
 
+    @Override
+    public List<User> listUserByPage(int startIndex, int pageSize) {
+        try{
+            String sql="select * from user limit ?,?";
+            Object[] params={startIndex,pageSize};
+            return jdbcOperations.query(sql,params, new RowMapper<User>() {
+                @Override
+                public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    User user=new User();
+                    user.setUserId(rs.getInt("userid"));
+                    user.setUsername(rs.getString("username"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    user.setAvatarUri(rs.getString("avatar_uri"));
+                    user.setIsValidate(rs.getInt("is_validate"));
+                    return user;
+                }
+            });
+        }
+        catch (EmptyResultDataAccessException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package bookmanager.web.service.impl;
 
 import bookmanager.web.dao.UserDao;
+import bookmanager.web.model.Page;
 import bookmanager.web.model.User;
 import bookmanager.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -67,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
+     *更新用户信息
      * @param user
      */
     @Override
@@ -75,8 +77,45 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(user);
     }
 
+    /**
+     * 增加用户
+     * @param user
+     */
     @Override
     public void insertUser(User user) {
         userDao.insertUser(user);
     }
+
+    /**
+     * 列出一页用户
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<User> listUserByPage(int pageNumber, int pageSize) {
+        int totalRecord=userDao.listAllUser().size();//获取总数
+        Page page=new Page(pageNumber,pageSize,totalRecord);
+        int startIndex=page.getStartIndex();
+        return userDao.listUserByPage(startIndex,pageSize);
+    }
+
+    /**
+     * 得到用户总数
+     * @return
+     */
+    @Override
+    public int getUserNumber() {
+        return userDao.listAllUser().size();
+    }
+
+    /**
+     * 删除用户
+     * @param userId
+     */
+    @Override
+    public void deleteUser(int userId) {
+        userDao.deleteUser(userId);
+    }
+
 }

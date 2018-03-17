@@ -61,9 +61,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu ">
-                    <li class="active"><a  href=".${pageContext.request.contextPath }/admin/addbook"><i class="fa fa-search"></i> 增加书籍</a></li>
-                    <li><a href="${pageContext.request.contextPath }/admin/deletebook"><i class="fa fa-circle-o"></i> 删除书籍</a></li>
-                    <li><a href="${pageContext.request.contextPath }/admin/bookmanage"><i class="fa fa-circle-o"></i> 修改书籍信息</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/booklist"><i class="fa fa-circle-o"></i> 图书列表</a></li>
+                    <li ><a  href="${pageContext.request.contextPath }/admin/addbook"><i class="fa fa-search"></i> 增加图书</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -74,9 +73,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i> 用户列表</a></li>
+                    <li><a href="${pageContext.request.contextPath }/admin/listuser"><i class="fa fa-circle-o"></i> 用户列表</a></li>
                     <li><a href="${pageContext.request.contextPath }/admin/adduser"><i class="fa fa-circle-o"></i> 增加用户</a></li>
-                    <li><a href="${pageContext.request.contextPath }/admin/deleteuser"><i class="fa fa-circle-o"></i> 删除用户</a></li>
                     <li><a href="${pageContext.request.contextPath }/admin/blacklistuser"><i class="fa fa-circle-o"></i> 用户黑名单</a></li>
                 </ul>
             </li>

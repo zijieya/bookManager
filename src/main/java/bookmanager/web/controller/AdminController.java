@@ -6,6 +6,7 @@ import bookmanager.web.service.BookService;
 import bookmanager.web.service.BorrowService;
 import bookmanager.web.service.UserService;
 import com.google.gson.Gson;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-@SessionAttributes("bookId")
+@SessionAttributes({"userId","bookId"})
 
 //管理员控制器
 @Controller
@@ -71,7 +72,8 @@ public class AdminController {
      */
     @RequestMapping(value = "/admin/adduser",method = POST)
     public String addUser(User user){
-        return "admin/adduser";
+        userService.insertUser(user);
+        return "admin/userlist";
     }
 
     /**
@@ -91,9 +93,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/admin/bookmanage/{bookId}",method= GET)
     public String bookManage(@PathVariable("bookId") int bookId,Model model){
-        Book book=new Book();
         model.addAttribute("bookId",bookId);//存储图书编号
-        book.setBookId(bookId);
         return "admin/bookmanage";
     }
 
@@ -109,12 +109,13 @@ public class AdminController {
     }
 
     /**
-     * 操作用户
+     * 删除用户
      * @return
      */
-    @RequestMapping(value = "/admin/deleteuser",method= GET)
-    public String deleteUser(){
-        return "admin/deleteuser";
+    @RequestMapping(value = "/admin/deleteuser/{userId}",method= GET)
+    public String deleteUser(@PathVariable("userId") int userId){
+        userService.deleteUser(userId);
+        return "admin/userlist";
     }
 
     /**
@@ -136,7 +137,7 @@ public class AdminController {
     }
 
     /**
-     * 列出图书
+     * 列出图书页面
      * @return
      */
     @RequestMapping(value = "/admin/booklist",method= GET)
@@ -176,5 +177,44 @@ public class AdminController {
         bookService.updateBook(book);
         return "/admin/booklist";
     }
+    @RequestMapping(value = "/admin/listuser",method= GET)
+    public String listUser(){
+        return "/admin/userlist";
+    }
+    @RequestMapping(value = "/admin/listusers",produces = "application/json; charset=utf-8",method = GET)
+    @ResponseBody
+    public String listUsers( @RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber){
+        int total=userService.getUserNumber();
+        List<User> userList=userService.listUserByPage(pageNumber,pageSize);
+        Gson gson=new Gson();
+        Map<String,Object> file=new HashMap<String, Object>() ;
+        file.put("total",total);
+        file.put("rows",userList);
+        return gson.toJson(file);
+    }
 
+    /**
+     * 显示修改用户信息界面
+     * @param userId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/admin/usermanage/{userId}",method= GET)
+    public String userManage(@PathVariable("userId") int userId, Model model){
+        model.addAttribute("userId",userId);
+        return "/admin/usermanage";
+    }
+
+    /** TODO 此时不能处理空值
+     * 修改用户信息操作
+     * @param user
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/admin/usermanage",method= POST)
+    public String userManage(User user,@SessionAttribute("userId") int userId){
+        user.setUserId(userId);
+        userService.updateUser(user);
+        return "/admin/userlist";
+    }
 }
