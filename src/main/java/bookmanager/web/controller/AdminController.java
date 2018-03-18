@@ -2,8 +2,10 @@ package bookmanager.web.controller;
 
 import bookmanager.web.model.Book;
 import bookmanager.web.model.User;
+import bookmanager.web.model.UserRole;
 import bookmanager.web.service.BookService;
 import bookmanager.web.service.BorrowService;
+import bookmanager.web.service.UserRoleService;
 import bookmanager.web.service.UserService;
 import com.google.gson.Gson;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -29,7 +31,8 @@ public class AdminController {
     UserService userService;
     @Autowired
     BorrowService borrowService;
-
+    @Autowired
+    UserRoleService userRoleService;
     /**
      * 首页
      * @return
@@ -83,6 +86,22 @@ public class AdminController {
     @RequestMapping(value = "/admin/blacklistuser",method = GET)
     public String blacklistUser(){
         return "admin/blacklistuser";
+    }
+    /**TODO pageNumber的设置
+     * 用户黑名单操作
+     * @return
+     */
+    @RequestMapping(value = "/admin/blacklistusers",method = GET)
+    @ResponseBody
+    public String blacklistUser(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber){
+        int totalRecord=userRoleService.listUserRoleByType(2).size();//黑名单用户总数
+        System.out.println(totalRecord);
+        List<UserRole> userRoleList=userRoleService.listUserRoleByTypeAndPage(2,pageNumber,pageSize);
+        Gson gson=new Gson();
+        Map<String,Object> file=new HashMap<String, Object>() ;
+        file.put("total",totalRecord);
+        file.put("rows",userRoleList);
+        return gson.toJson(file);
     }
 
     /**
@@ -216,5 +235,18 @@ public class AdminController {
         user.setUserId(userId);
         userService.updateUser(user);
         return "/admin/userlist";
+    }
+
+    /**
+     * 移出黑名单
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/admin/movefromblacklist/{userId}",method= GET)
+    public String moveFromBlackList(@PathVariable("userId") int userId){
+        UserRole userRole= userRoleService.getUserRole(userId);//获得权限信息
+        userRole.setUserType(0);
+        userRoleService.updateUserRole(userRole);
+        return "/admin/blacklistuser";
     }
 }

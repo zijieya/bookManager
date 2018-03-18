@@ -13,6 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <!--bootstrap table-->
+  <link rel="stylesheet" href="../../css/bootstrap-table.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -69,25 +71,29 @@ desired effect
         <small>Optional description</small>
       </h1>-->
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 管理员</a></li>
+        <li class="active">用户黑名单</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+      <h3>用户黑名单</h3>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+      <div class="box  box-primary">
+        <div class="row">
+          <div class="col-md-12">
+            <table id="table2"></table>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   <jsp:include page="foot.jsp"></jsp:include>
-      </div>
-        </form>
       </div>
       <!-- /.tab-pane -->
     </div>
@@ -96,11 +102,65 @@ desired effect
 <script src="../../js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap-table.js"></script>
+<script src="../../js/bootstrap-table-zh-CN.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+    $('#table2').bootstrapTable({
+        method:"get",
+        url: "/admin/blacklistusers",
+        dataType: "json",
+        striped: true,
+        smartDisplay:true,
+        queryParamsType:'limit',
+        pagination: true,
+        sidePagination: "server",
+        pageNumber:1,
+        pageSize:5,
+        pageList:[5,10],
+        toolbar: '#toolbar',
+        clickToSelect: true,
+        classes:'table table-hover table-no-bordered',
+        columns: [{
+            field: 'userRoleId',
+            title: '用户编号'
+        }, {
+            field: 'userId',
+            title: '用户编号'
+        },{
+            field:'userType',
+            title:'用户类型'
+        },{
+            field:'move',
+            title:'移出',
+            formatter :function operateFormatter(value, row, index) {
+                return [
+                    '<button name="borrow" type="button" class="btn btn-danger ">移出</button>']
+                    .join('');
+
+            }
+        }
+        ],
+        queryParams:function (params) {
+          return {
+                pageSize:params.limit,
+                pageNumber:params.offset/params.limit
+            }
+
+
+        },
+        onClickCell:function(field, value, row, $element){
+            if(field=="move"){
+                window.location.href="/admin/movefromblacklist/"+row.userId;
+            }
+        }
+
+    })
+</script>
 </body>
 </html>
