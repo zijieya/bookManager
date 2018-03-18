@@ -45,7 +45,10 @@ public class LoginAndRegisterController {
                 return "user/searchbook";//用户登录成功则跳转到查找书籍界面
             }
             if(userRole.getUserType()==1){
-                return "admin/index";//管理员登录成功则跳到用户首页
+                return "admin/booklist";//管理员登录成功则跳到用户首页
+            }
+            if(userRole.getUserType()==2){
+                return "login";//黑名单用户无法登录
             }
         }
         return "login";
