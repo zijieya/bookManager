@@ -46,7 +46,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         int totalRecord=userRoleDao.listUserRoleByType(type).size();//总数
         Page page=new Page(pageNumber,pageSize,totalRecord);
         int startIndex=page.getStartIndex();
-        return userRoleDao.listUserRoleByTypeAndPage(type,pageNumber,pageSize);
+        return userRoleDao.listUserRoleByTypeAndPage(type,startIndex,pageSize);
     }
 
     /**

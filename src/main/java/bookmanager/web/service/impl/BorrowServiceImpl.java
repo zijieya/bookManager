@@ -65,4 +65,9 @@ public class BorrowServiceImpl implements BorrowService {
         borrow.setReturnTime(timestamp1);
         borrowDao.updateBorrow(borrow);
     }
+
+    @Override
+    public List<Borrow> listAllBorrow() {
+        return borrowDao.listAllBorrow();
+    }
 }

@@ -107,7 +107,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
                     UserRole userRole = new UserRole();
                     userRole.setUserRoleId(rs.getInt("userroleid"));
                     userRole.setUserId(rs.getInt("userid"));
-                    userRole.setUserType(rs.getInt("userId"));
+                    userRole.setUserType(rs.getInt("user_type"));
                     return userRole;
                 }
             });
@@ -128,7 +128,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
     @Override
     public List<UserRole> listUserRoleByTypeAndPage(int type, int startIndex, int pageSize) {
         try {
-            String sql = "SELECT * FROM userrole WHERE user_type=? LIMIT ?,?";
+            String sql = "select * from userrole where user_type=? limit ?,?";
             Object[] params={type,startIndex,pageSize};
             return jdbcOperations.query(sql, params,new RowMapper<UserRole>() {
                 @Override
@@ -136,7 +136,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
                     UserRole userRole = new UserRole();
                     userRole.setUserRoleId(rs.getInt("userroleid"));
                     userRole.setUserId(rs.getInt("userid"));
-                    userRole.setUserType(rs.getInt("userId"));
+                    userRole.setUserType(rs.getInt("user_type"));
                     return userRole;
                 }
             });

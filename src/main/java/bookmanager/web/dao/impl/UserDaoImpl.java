@@ -172,7 +172,6 @@ public class UserDaoImpl  implements UserDao {
     public List<User> listAllUser() {
         try{
             String sql="select * from user";
-           // Object[] params={user.getEmail(),user.getPassword()};
             return jdbcOperations.query(sql, new RowMapper<User>() {
                 @Override
                 public User mapRow(ResultSet rs, int rowNum) throws SQLException {

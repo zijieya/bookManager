@@ -1,6 +1,7 @@
 package bookmanager.web.controller;
 
 import bookmanager.web.model.Book;
+import bookmanager.web.model.Borrow;
 import bookmanager.web.model.User;
 import bookmanager.web.model.UserRole;
 import bookmanager.web.service.BookService;
@@ -95,7 +96,6 @@ public class AdminController {
     @ResponseBody
     public String blacklistUser(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber){
         int totalRecord=userRoleService.listUserRoleByType(2).size();//黑名单用户总数
-        System.out.println(totalRecord);
         List<UserRole> userRoleList=userRoleService.listUserRoleByTypeAndPage(2,pageNumber,pageSize);
         Gson gson=new Gson();
         Map<String,Object> file=new HashMap<String, Object>() ;
@@ -248,5 +248,45 @@ public class AdminController {
         userRole.setUserType(0);
         userRoleService.updateUserRole(userRole);
         return "/admin/blacklistuser";
+    }
+    /**
+     * 移入黑名单
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/admin/movetoblacklist/{userId}",method= GET)
+    public String moveToBlackList(@PathVariable("userId") int userId){
+        UserRole userRole= userRoleService.getUserRole(userId);//获得权限信息
+        userRole.setUserType(2);
+        userRoleService.updateUserRole(userRole);
+        return "/admin/blacklistuser";
+    }
+
+    /**
+     * 显示借阅管理界面
+     * @return
+     */
+    @RequestMapping(value = "/admin/borrowmanage",method = GET)
+    public String borrowmanage(){
+        return "/admin/borrowmanage";
+    }
+
+    /**
+     * 显示借阅信息
+     * @param pageSize
+     * @param pageNumber
+     * @return
+     */
+    @RequestMapping(value = "/admin/borrowmanages",method = GET)
+    @ResponseBody
+    public String borrowmanage(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber){
+        int total=borrowService.listAllBorrow().size();//获得总数
+        List<Borrow> borrowList=borrowService.listBorrowByPage(pageNumber,pageSize);
+        Gson gson=new Gson();
+        //生成满足bootstrap table的数据
+        Map<String,Object> file=new HashMap<String, Object>() ;
+        file.put("total",total);
+        file.put("rows",borrowList);
+        return gson.toJson(file);
     }
 }

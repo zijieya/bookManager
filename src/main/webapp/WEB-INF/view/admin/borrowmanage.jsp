@@ -13,6 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <!--bootstrap table-->
+    <link rel="stylesheet" href="../../css/bootstrap-table.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -59,7 +61,8 @@ desired effect
 <div class="wrapper">
   <jsp:include page="head.jsp"></jsp:include>
   <!-- Left side column. contains the logo and sidebar -->
- <jsp:include page="side.jsp"></jsp:include>
+  <jsp:include page="side.jsp"></jsp:include>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -69,8 +72,8 @@ desired effect
         <small>Optional description</small>
       </h1>-->
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 管理员</a></li>
+        <li class="active">借阅管理</li>
       </ol>
     </section>
 
@@ -80,15 +83,20 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+        <h3>借阅管理</h3>
+        <div class="box  box-primary">
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="table2"></table>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
 <jsp:include page="foot.jsp"></jsp:include>
-      </div>
-        </form>
       </div>
       <!-- /.tab-pane -->
     </div>
@@ -99,9 +107,70 @@ desired effect
 <script src="../../js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/adminlte.min.js"></script>
+<script src="../../js/bootstrap-table.js"></script>
+<script src="../../js/bootstrap-table-zh-CN.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+    $('#table2').bootstrapTable({
+        method:"get",
+        url: "/admin/borrowmanages",
+        dataType: "json",
+        striped: true,
+        smartDisplay:true,
+        queryParamsType:'limit',
+        pagination: true,
+        sidePagination: "server",
+        pageNumber:1,
+        pageSize:1,
+        pageList:[5,10],
+        // toolbar: '#toolbar',
+        clickToSelect: true,
+        classes:'table table-hover table-no-bordered',
+        columns: [{
+            field: 'borrowId',
+            title: '借阅编号'
+        }, {
+            field:'userId',
+            title:'用户编号'
+        },{
+            field: 'bookId',
+            title: '图书编号'
+        },{
+            field:'borrowTime',
+            title:'借阅时间'
+        },{
+            field:'returnTime',
+            title:'还书时间'
+        },{
+            field:'reBorrowTimes',
+            title:'续借次数'
+        },{
+            field:'blacklist',
+            title:'黑名单',
+            formatter :function operateFormatter(value, row, index) {
+                return [
+                    '<button name="borrow" type="button" class="btn btn-danger">移入</button>']
+                    .join('');
+
+            }
+        }
+        ],
+        queryParams:function (params) {
+            return {
+                pageSize:params.limit,
+                pageNumber:params.offset/params.limit+1
+            }
+
+
+        },
+        onClickCell:function(field, value, row, $element){
+            if(field=="blacklist"){
+               window.location.href="/admin/movetoblacklist/"+row.userId;
+        }
+    }})
+</script>
 </body>
 </html>

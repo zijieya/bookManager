@@ -128,13 +128,10 @@ desired effect
         classes:'table table-hover table-no-bordered',
         columns: [{
             field: 'userRoleId',
-            title: '用户编号'
+            title: '用户权限编号'
         }, {
             field: 'userId',
             title: '用户编号'
-        },{
-            field:'userType',
-            title:'用户类型'
         },{
             field:'move',
             title:'移出',
@@ -149,7 +146,7 @@ desired effect
         queryParams:function (params) {
           return {
                 pageSize:params.limit,
-                pageNumber:params.offset/params.limit
+                pageNumber:params.offset/params.limit+1
             }
 
 

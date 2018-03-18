@@ -52,7 +52,6 @@
                    <li><a href="#">Link in level 2</a></li>
                  </ul>
                </li>-->
-            <li ><a  href="${pageContext.request.contextPath }/admin/index"><i class="fa fa-search"></i> 首页</a></li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-book"></i> <span>图书管理</span>
@@ -78,18 +77,7 @@
                     <li><a href="${pageContext.request.contextPath }/admin/blacklistuser"><i class="fa fa-circle-o"></i> 用户黑名单</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-user"></i> <span>借阅管理</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath }/admin/rebookmanage"><i class="fa fa-circle-o"></i> 续借管理</a></li>
-                    <li><a href="${pageContext.request.contextPath }/admin/overduemanage"><i class="fa fa-circle-o"></i> 超期管理</a></li>
-                </ul>
-            </li>
+            <li><a href="${pageContext.request.contextPath }/admin/borrowmanage"><i class="fa fa-circle-o"></i> 借阅管理</a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
