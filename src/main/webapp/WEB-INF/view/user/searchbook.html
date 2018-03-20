@@ -1,30 +1,30 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>图书借阅系统</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <!--bootstrap table-->
-  <link rel="stylesheet" href="../../css/bootstrap-table.css">
+  <link rel="stylesheet" th:href="@{/css/bootstrap-table.css}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../css/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../css/ionicons.min.css">
+  <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../css/AdminLTE.min.css">
+  <link rel="stylesheet" th:href="@{/css/AdminLTE.min.css}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../css/skin-blue.min.css">
+  <link rel="stylesheet" th:href="@{/css/skin-blue.min.css}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,9 +59,9 @@ desired effect
 -->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <jsp:include page="head.jsp"></jsp:include>
+  <div th:include="user/head"></div>
   <!-- Left side column. contains the logo and sidebar -->
-  <jsp:include page="side.jsp"></jsp:include>
+  <div th:include="user/side"></div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -108,20 +108,20 @@ desired effect
   </div>
   <!-- /.content-wrapper -->
   <!-- Main Footer -->
-<jsp:include page="foot.jsp"></jsp:include>
+  <div th:include="user/foot"></div>
       </div>
       </div>
       <!-- /.tab-pane -->
     </div>
 </aside>
 <!-- jQuery 3 -->
-<script src="../../js/jquery.min.js"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
-<script src="../../js/adminlte.min.js"></script>
-<script src="../../js/bootstrap-table.js"></script>
-<script src="../../js/bootstrap-table-zh-CN.js"></script>
+<script th:src="@{/js/adminlte.min.js}"></script>
+<script th:src="@{/js/bootstrap-table.js}"></script>
+<script th:src="@{/js/bootstrap-table-zh-CN.js}"></script>
 <script>
     $('#table2').bootstrapTable({
         method:"get",

@@ -1,30 +1,30 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+<html html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>图书借阅系统|管理员</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <!--bootstrap table-->
-    <link rel="stylesheet" href="../../css/bootstrap-table.css">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <!--bootstrap table-->
+  <link rel="stylesheet" th:href="@{/css/bootstrap-table.css}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../css/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../css/ionicons.min.css">
+  <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../css/AdminLTE.min.css">
+  <link rel="stylesheet" th:href="@{/css/AdminLTE.min.css}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../css/skin-blue.min.css">
+  <link rel="stylesheet" th:href="@{/css/skin-blue.min.css}">
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,10 +59,9 @@ desired effect
 -->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <jsp:include page="head.jsp"></jsp:include>
+  <div th:include="admin/head"></div>
   <!-- Left side column. contains the logo and sidebar -->
-  <jsp:include page="side.jsp"></jsp:include>
-
+  <div th:include="admin/side"></div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -73,42 +72,40 @@ desired effect
       </h1>-->
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 管理员</a></li>
-        <li class="active">借阅管理</li>
+        <li class="active">用户黑名单</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+      <h3>用户黑名单</h3>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <h3>借阅管理</h3>
-        <div class="box  box-primary">
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="table2"></table>
-                </div>
-            </div>
+      <div class="box  box-primary">
+        <div class="row">
+          <div class="col-md-12">
+            <table id="table2"></table>
+          </div>
         </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-<jsp:include page="foot.jsp"></jsp:include>
+  <div th:include="admin/foot"></div>
       </div>
       <!-- /.tab-pane -->
     </div>
   </aside>
 <!-- jQuery 3 -->
-<script src="../../js/jquery.min.js"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
-<script src="../../js/adminlte.min.js"></script>
-<script src="../../js/bootstrap-table.js"></script>
-<script src="../../js/bootstrap-table-zh-CN.js"></script>
+<script th:src="@{/js/adminlte.min.js}"></script>
+<script th:src="@{/js/bootstrap-table.js}"></script>
+<script th:src="@{/js/bootstrap-table-zh-CN.js}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
@@ -116,7 +113,7 @@ desired effect
 <script>
     $('#table2').bootstrapTable({
         method:"get",
-        url: "/admin/borrowmanages",
+        url: "/admin/blacklistusers",
         dataType: "json",
         striped: true,
         smartDisplay:true,
@@ -124,42 +121,30 @@ desired effect
         pagination: true,
         sidePagination: "server",
         pageNumber:1,
-        pageSize:1,
+        pageSize:5,
         pageList:[5,10],
-        // toolbar: '#toolbar',
+        toolbar: '#toolbar',
         clickToSelect: true,
         classes:'table table-hover table-no-bordered',
         columns: [{
-            field: 'borrowId',
-            title: '借阅编号'
+            field: 'userRoleId',
+            title: '用户权限编号'
         }, {
-            field:'userId',
-            title:'用户编号'
+            field: 'userId',
+            title: '用户编号'
         },{
-            field: 'bookId',
-            title: '图书编号'
-        },{
-            field:'borrowTime',
-            title:'借阅时间'
-        },{
-            field:'returnTime',
-            title:'还书时间'
-        },{
-            field:'reBorrowTimes',
-            title:'续借次数'
-        },{
-            field:'blacklist',
-            title:'黑名单',
+            field:'move',
+            title:'移出',
             formatter :function operateFormatter(value, row, index) {
                 return [
-                    '<button name="borrow" type="button" class="btn btn-danger">移入</button>']
+                    '<button name="borrow" type="button" class="btn btn-danger ">移出</button>']
                     .join('');
 
             }
         }
         ],
         queryParams:function (params) {
-            return {
+          return {
                 pageSize:params.limit,
                 pageNumber:params.offset/params.limit+1
             }
@@ -167,10 +152,12 @@ desired effect
 
         },
         onClickCell:function(field, value, row, $element){
-            if(field=="blacklist"){
-               window.location.href="/admin/movetoblacklist/"+row.userId;
+            if(field=="move"){
+                window.location.href="/admin/movefromblacklist/"+row.userId;
+            }
         }
-    }})
+
+    })
 </script>
 </body>
 </html>
