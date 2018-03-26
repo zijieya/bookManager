@@ -4,11 +4,11 @@ import bookmanager.web.model.User;
 import bookmanager.web.model.UserRole;
 import bookmanager.web.service.UserRoleService;
 import bookmanager.web.service.UserService;
+import bookmanager.web.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -17,13 +17,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 // 登录注册控制器
 @Controller
-@SessionAttributes({"user","number"})
+@SessionAttributes({"user","number","hash"})
 public class LoginAndRegisterController {
     @Autowired
     JavaMailSender javaMailSender; //字段注入
     private UserService userService;
     @Autowired
     UserRoleService userRoleService;
+    @Autowired
+    Md5Util md5Util;
     @Autowired
     LoginAndRegisterController(UserService userService){
         this.userService = userService;
@@ -39,8 +41,11 @@ public class LoginAndRegisterController {
         User user1= userService.getLoginUser(user);
         if(user1!=null)
         {
+            String email=user1.getEmail();//获得邮箱
+            String hash= md5Util.md5Hex(email);//获得转码后的值
             UserRole userRole=userRoleService.getUserRole(user1.getUserId());//获得用户权限信息
             model.addAttribute("user",user1);//将数据传入模型中
+            model.addAttribute("hash",hash);
             if(userRole.getUserType()==0){//普通用户
                 return "user/searchbook";//用户登录成功则跳转到查找书籍界面
             }
